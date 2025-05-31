@@ -53,9 +53,14 @@ $connection=Databaseconn::getconnection();
 $connection=Databaseconn::getconnection();
 $connection=Databaseconn::getconnection();*/
 
-$user="";
-$pass="";
+$user="Muthukumar";
+$pass="muthukumar";
 $result=null;
+
+if(isset($_GET['logout'])){
+    session::destroy();
+    die("Session Destroy,<a href='login.php'>Login again</a>");
+}
 if (session::get('is_logedin')) {
     $userdata=session::get('session_user');
     print("Wlecome Back ,$userdata[username]");
