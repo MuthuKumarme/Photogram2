@@ -1,5 +1,6 @@
 <?php
 include "libs/load.php";
+
 //include_once 'libs/Databaseclass.php';
 //include_once 'libs/userclass.php';
 
@@ -28,7 +29,7 @@ class mic
     public $light;
     public function __construct()
     {
-        print("Construct object");
+        print("Construct object\n");
 
     }
     public function setLight($light)
@@ -39,11 +40,27 @@ class mic
     {
         return $this->light;
     }
+
+    public function __call($name, $arguments)
+    {
+
+       /// $name="getFirstName";
+       // $property=preg_replace("/[^0-9a-zA-Z]/","",substr($name,3));
+        //$property=strtolower(preg_replace('/\B([A-Z])/','_$1',$property));
+        //echo $property;
+        print(substr($name, 0, 3));
+        print_r($arguments);
+
+
+    }
+
 }
 $m1=new mic;
-print(ucwords("\nmuthu kumar"));
+print(ucwords("\nmuthu kumar\n"));
+print(substr("muthukumar", 0, 3));
 $m1->setLight("white");
-printf("\nLight color is:%s", $m1->getLight());*/
+$m1->setblub(array(1,2,3,4,5));
+printf("\nLight color is:%s", $m1->getLight());
 
 
 /*$connection=Databaseconn::getconnection();
@@ -51,33 +68,7 @@ $connection=Databaseconn::getconnection();
 $connection=Databaseconn::getconnection();
 $connection=Databaseconn::getconnection();
 $connection=Databaseconn::getconnection();
-$connection=Databaseconn::getconnection();*/
+$connection=Databaseconn::getconnection();
+*/
 
-$user="Muthukumar";
-$pass="muthukumar";
-$result=null;
-
-if(isset($_GET['logout'])){
-    session::destroy();
-    die("Session Destroy,<a href='login.php'>Login again</a>");
-}
-if (session::get('is_logedin')) {
-    $userdata=session::get('session_user');
-    print("Wlecome Back ,$userdata[username]");
-    $result=$userdata;
-} else {
-    printf("No session is found....");
-    $result=user::login($user, $pass);
-
-
-
-    if ($result) {
-        
-        printf("Login sucessfully<br>,$result[username]");
-        session::set('is_logedin',true);
-        session::set('session_user',$result);
-
-    } else {
-        printf("Login Fail<br>");
-    }
-}
+?>

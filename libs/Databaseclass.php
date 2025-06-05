@@ -16,17 +16,20 @@ class Databaseconn
             // Create connectionysqli_connect("mysql.selfmade.ninja", "mkmuthu", "", "mkmuthu_photogram");
             
         
-            $connection =mysqli_connect($servername, $username, $password, $database);
-            if (!$connection) {
-                die("Connection failed: " . mysqli_connect_error());
-            } else {
-                print("\n new connection extablished");
-                Databaseconn::$conn=$connection;
-                return Databaseconn::$conn;
-                
+           
+            try {
+                $connection =mysqli_connect($servername, $username, $password, $database);
+            } catch (Exception $th) {
+                echo $th->getMessage();
             }
+            Databaseconn::$conn=$connection;
+            return Databaseconn::$conn;
+            //print("\n new connection extablished");
+                
+                
+            
         } else {
-            print("\n exting connection");
+            //print("\n exting connection");
             return Databaseconn::$conn;
             
         }
